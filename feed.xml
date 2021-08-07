@@ -5,8 +5,8 @@
     <description>All about Simcookies Project.</description>
     <link>https://simcookies.github.io/</link>
     <atom:link href="https://simcookies.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 23 Jul 2021 15:42:33 +0900</pubDate>
-    <lastBuildDate>Fri, 23 Jul 2021 15:42:33 +0900</lastBuildDate>
+    <pubDate>Sat, 07 Aug 2021 23:46:04 +0900</pubDate>
+    <lastBuildDate>Sat, 07 Aug 2021 23:46:04 +0900</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
     
       <item>
@@ -79,14 +79,14 @@
       </item>
     
       <item>
-        <title>机器学习算法系列 - 最小二乘法/岭回归/Lasso</title>
-        <description>&lt;p&gt;&lt;strong&gt;普通最小二乘法&lt;/strong&gt;(Ordinary Least Squares, OLS), &lt;strong&gt;岭回归&lt;/strong&gt;(Ridge Regression), 最小绝对值收留和选择算子(Least absolute shrinkage and selection operator, &lt;strong&gt;Lasso&lt;/strong&gt;), 这三个算法是线性模型中比较基本的算法. 这一篇文章里一次性对这三个进行一个简单的总结.&lt;/p&gt;
+        <title>机器学习算法系列 - 最小二乘法/岭回归/Lasso/Elastic-Net</title>
+        <description>&lt;p&gt;&lt;strong&gt;普通最小二乘法&lt;/strong&gt;(Ordinary Least Squares, OLS), &lt;strong&gt;岭回归&lt;/strong&gt;(Ridge Regression), 最小绝对值收留和选择算子(Least absolute shrinkage and selection operator, &lt;strong&gt;Lasso&lt;/strong&gt;), 弹性网络(&lt;strong&gt;Elastic-Net&lt;/strong&gt;), 这四个算法是线性模型中比较基本的算法. 这一篇文章里一次性对这四个进行一个简单的总结.&lt;/p&gt;
 
-&lt;p&gt;首先, 因为三者都是线性模型, 所以首先假设我们该模型为:&lt;/p&gt;
+&lt;p&gt;首先, 因为四者都是线性模型, 所以首先假设我们该模型为:&lt;/p&gt;
 
 \[y(w,x)=w_0+w_1x_1+\dots+w_mx_m\notag\]
 
-&lt;p&gt;其中 $w=(w_1,\dots,w_m)$ 称为系数 (coefficient), 而 $w_0$ 称为截距 (intercept), 而三个算法就是为了找出系数和截距. 使用矩阵的方式表达显得更亲切:&lt;/p&gt;
+&lt;p&gt;其中 $w=(w_1,\dots,w_m)$ 称为系数 (coefficient), 而 $w_0$ 称为截距 (intercept), 而四个算法就是为了找出系数和截距. 使用矩阵的方式表达显得更亲切:&lt;/p&gt;
 
 \[y=\begin{bmatrix}y_1\\y_2\\\vdots\\y_n\end{bmatrix},
 X=\begin{bmatrix}
@@ -229,9 +229,22 @@ s.t.\sum_{i=1}^n|w_i|\leq t\]
 
 &lt;p&gt;由于上述的特征, Lasso算法可以通过调整正则化参数, 使得一些特征量的权重参数为 0, 也就是删除这些特征量 (这也会使得计算量会变小). &lt;strong&gt;因此Lasso回归也能够用来做特征选择.&lt;/strong&gt;  Lasso名字中的 Selection Operator 也指出了这一点. 另外和岭回归一样, 通过交叉验证, 选择出一个合适的正则化参数也是非常重要的.&lt;/p&gt;
 
+&lt;h1 id=&quot;elastic-net-202187追记&quot;&gt;Elastic-Net (2021/8/7追记)&lt;/h1&gt;
+
+&lt;p&gt;弹性网络算法是上述岭回归和Lasso回归的混合体或者说是折衷方案, 同时使用了 L1 正则化和 L2 正则化, 也确实能够达到两个算法的效果. 以公式说明:&lt;/p&gt;
+
+\[\begin{align*}
+&amp;amp;\min_w\left\|Xw-y\right\|_2^2+\lambda_2\left\|w\right\|_2^2+\lambda_1\left\|w\right\|_1\\
+=&amp;amp;\min_w\sum_{i=1}^m\left(y_i-x_i^Tw\right)^2+\lambda_2\sum_{i=1}^nw_i^2+\lambda_1\sum_{i=1}^n|w_i|
+\end{align*}\]
+
+&lt;p&gt;弹性网络算法既能向 Lasso 回归一样处理疏矩阵的问题, 也能够保留岭回归处理病态数据和共线性问题的优点, 这里不展开具体的讨论.&lt;/p&gt;
+
+&lt;p&gt;Scikit-Learn中提供了 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ElasticNet&lt;/code&gt; 用于实现弹性网络回归模型.&lt;/p&gt;
+
 &lt;hr /&gt;
 
-&lt;p&gt;以上就是线性模型中常用的基本的三个算法. 写的内容不是很难, 但是在写的过程中我发现文章当中”统计模型” 以及 “机器学习” 的内容似乎混杂在了一起. 这不禁让我对这两者的区别产生了思考, 所以这篇文章花了相当长的时间. 估计之后会写一篇新的文章, 以总结自己针对两者的区别的调查和思考.&lt;/p&gt;
+&lt;p&gt;以上就是线性模型中常用的基本的四个算法. 写的内容不是很难, 但是在写的过程中我发现文章当中”统计模型” 以及 “机器学习” 的内容似乎混杂在了一起. 这不禁让我对这两者的区别产生了思考, 所以这篇文章花了相当长的时间. 估计之后会写一篇新的文章, 以总结自己针对两者的区别的调查和思考.&lt;/p&gt;
 
 &lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
   &lt;ol&gt;
