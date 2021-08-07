@@ -5,8 +5,8 @@
     <description>All about Simcookies Project.</description>
     <link>https://simcookies.github.io/</link>
     <atom:link href="https://simcookies.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 07 Aug 2021 23:46:04 +0900</pubDate>
-    <lastBuildDate>Sat, 07 Aug 2021 23:46:04 +0900</lastBuildDate>
+    <pubDate>Sat, 07 Aug 2021 23:55:59 +0900</pubDate>
+    <lastBuildDate>Sat, 07 Aug 2021 23:55:59 +0900</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
     
       <item>
@@ -238,9 +238,9 @@ s.t.\sum_{i=1}^n|w_i|\leq t\]
 =&amp;amp;\min_w\sum_{i=1}^m\left(y_i-x_i^Tw\right)^2+\lambda_2\sum_{i=1}^nw_i^2+\lambda_1\sum_{i=1}^n|w_i|
 \end{align*}\]
 
-&lt;p&gt;弹性网络算法既能向 Lasso 回归一样处理疏矩阵的问题, 也能够保留岭回归处理病态数据和共线性问题的优点, 这里不展开具体的讨论.&lt;/p&gt;
+&lt;p&gt;总的来说, 弹性网络算法既能像 Lasso 回归一样处理疏矩阵的问题, 也能够保留岭回归处理病态数据和共线性问题的优点. 有一点关键的地方在于, 弹性网络算法不会像 Lasso 那样单纯地将模型变量地权重置零. 尤其当多个自变量和因变量之间存在关系的时候, 可能这些自变量存在一些群体效果, 在他们共同作用下因变量才产生了变化. &lt;strong&gt;而此时因为自变量的高度相关性, Lasso 回归会只选择其中一个而舍弃其他的, 但弹性网络则倾向于选择多个.&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;Scikit-Learn中提供了 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ElasticNet&lt;/code&gt; 用于实现弹性网络回归模型.&lt;/p&gt;
+&lt;p&gt;Scikit-Learn中提供了 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ElasticNet&lt;/code&gt; 用于实现弹性网络回归模型, 同时还提供了 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ElasticNetCV&lt;/code&gt; 使用交叉验证以找到合适的正则化参数.&lt;/p&gt;
 
 &lt;hr /&gt;
 
